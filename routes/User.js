@@ -65,4 +65,24 @@ userRouter.post('/todo',passport.authenticate('jwt',{session : false}),(req,res)
     })
 });
 
+
+userRouter.get('/todos',passport.authenticate('jwt',{session : false}),(req,res)=>{
+    User.findById({_id : req.user._id}).populate('todos').exec((err,document)=>{
+        if(err)
+            res.status(500).json({message : {msgBody : "Error has occurred", msgError: true}});
+        else{
+            res.status(200).json({todos : document.todos, authenticated : true});
+        }
+    });
+});
+
+userRouter.get('/admin',passport.authenticate('jwt',{session : false}),(req,res)=>{
+    if(req.user.role === 'admin'){
+        res.status(200).json({message : {msgBody : 'You are an admin', msgError : false}});
+    }
+    else
+        res.status(403).json({message : {msgBody : "You're not an admin,go away", msgError : true}});
+});
+
+
 module.exports = userRouter;
