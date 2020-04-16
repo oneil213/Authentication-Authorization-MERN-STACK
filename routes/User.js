@@ -6,7 +6,12 @@ const JWT = require('jsonwebtoken');
 const User = require('../models/User');
 const Todo = require('../models/todo');
 
-
+const signToken = userID =>{
+    return JWT.sign({
+        iss : "oneil213",
+        sub : userID
+    },"oneil213",{expiresIn : "1 day"});
+}
 
 userRouter.post('/register', (req,res)=>{
     const {username,password,role} = req.body;
