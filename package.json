@@ -1,0 +1,20 @@
+{
+  "name": "Boilerplate",
+  "version": "1.0.0",
+  "Author": "Adeola Oni",
+  "description": " Boilerplate App for MERN stack Applications ",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev" : "nodemon app.js",
+    "start" : "node app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cookie-parser": "^1.4.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.9"
+  }
+}
