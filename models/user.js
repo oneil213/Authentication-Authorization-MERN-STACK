@@ -8,7 +8,7 @@ let enu = {
    message: 'Role is invalid'
   };
 
-const userSchema = new mongoose.Schema({
+const UserSchema = new mongoose.Schema({
     username: {
         type: String,
         required: true,
@@ -32,18 +32,18 @@ const userSchema = new mongoose.Schema({
 
 // hash password before saving into database
 
-userSchema.pre('save', function(next){
+UserSchema.pre('save', function(next){
     if(!this.isModified('password'))
     return next();
     bcrypt.hash(this.password,10,(err,passwordHash)=>{
         if(err)
-        return next(err);
+            return next(err);
         this.password = passwordHash;
         next();
     });
 });
 
-userSchema.methods.comparePassword = function(password,cb){
+UserSchema.methods.comparePassword = function(password,cb){
     bcrypt.compare(password, this.password, (err, isMatch)=>{
         if(err)
             return cb(err);
@@ -55,4 +55,4 @@ userSchema.methods.comparePassword = function(password,cb){
     });
 }
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('User', UserSchema);

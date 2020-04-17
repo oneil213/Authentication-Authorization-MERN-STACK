@@ -12,24 +12,10 @@ mongoose.connect('mongodb://localhost:27017/mernauth', {useNewUrlParser : true ,
     console.log('successfully connected to mongose database');
 } );
 
+const userRouter = require('./routes/User');
+app.use('/user', userRouter);
 
 
-//Testing user model without front-end
-
-const User = require('./models/user');
-
-const userInput = {
-    username: "oneil213",
-    password: "morakinyo263",
-    role: "admin"
-}
-
-const user = new User(userInput);
-user.save((err, document)=>{
-    if(err)
-        console.log(err);
-    console.log(document);
-});
 
 // Start App & Port Determination
 app.listen(5000, ()=> {
